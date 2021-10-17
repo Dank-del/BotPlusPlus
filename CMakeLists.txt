@@ -4,9 +4,6 @@ project(BotPlusPlus VERSION 0.1.0)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20 -Wall -O3")
 set(Boost_USE_MULTITHREADED ON)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20 -Wall -O3")
-set(Boost_USE_MULTITHREADED ON)
-
 find_package(Threads REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(Boost COMPONENTS system REQUIRED)
@@ -37,6 +34,6 @@ FetchContent_MakeAvailable(TgBot)
 FetchContent_MakeAvailable(spdlog)
 FetchContent_MakeAvailable(mdparser-cpp)
 
-add_executable(BotPlusPlus main.cpp)
-target_link_libraries(BotPlusPlus TgBot spdlog mdparser-cpp)
+add_executable(${PROJECT_NAME} main.cpp)
+target_link_libraries(${PROJECT_NAME} TgBot spdlog mdparser-cpp)
 
