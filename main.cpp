@@ -4,10 +4,16 @@
 #include <mdparser-cpp/WotoMd.cpp>
 #include "cmds/info.cpp"
 
-int main() {
+int main(int argc, char *argv[]) {
     spdlog::set_level(spdlog::level::debug); // Set global log level to debug
     spdlog::set_pattern("[%H:%M:%S %z] [Bot++] [%^---%L---%$] [thread %t] %v");
-    TgBot::Bot bot("1223388851:AAGeSBL2_0JTW6Afh5yyCeHiCdUw7MJ0aqw");
+    if (argc == 1) {
+        spdlog::error("Bot token wasn't provided, quitting....");
+        exit(1);
+    }
+    auto bot_token = (std::string(argv[1]));
+    spdlog::info("Using bot token {}", bot_token);
+    TgBot::Bot bot(bot_token);
     auto self = bot.getApi().getMe();
     bot.getEvents().onCommand("start", [&bot](const TgBot::Message::Ptr& message) {
         auto msg = get_bold("Hi ")->AppendUserMention(message->from->firstName, message->from->id)->AppendBold(", I'm a bot.");
