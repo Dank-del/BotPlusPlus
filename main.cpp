@@ -1,6 +1,4 @@
-#include <stdio.h>
 #include <tgbot/tgbot.h>
-#include <boost/format.hpp>
 #include <spdlog/spdlog.h>
 #include <mdparser-cpp/WotoMd.h>
 #include <mdparser-cpp/WotoMd.cpp>
@@ -11,11 +9,11 @@ int main() {
     spdlog::set_pattern("[%H:%M:%S %z] [Bot++] [%^---%L---%$] [thread %t] %v");
     TgBot::Bot bot("1223388851:AAGeSBL2_0JTW6Afh5yyCeHiCdUw7MJ0aqw");
     auto self = bot.getApi().getMe();
-    bot.getEvents().onCommand("start", [&bot](TgBot::Message::Ptr message) {
+    bot.getEvents().onCommand("start", [&bot](const TgBot::Message::Ptr& message) {
         auto msg = get_bold("Hi ")->AppendUserMention(message->from->firstName, message->from->id)->AppendBold(", I'm a bot.");
         bot.getApi().sendMessage(message->chat->id, msg->ToString(), false, 0, nullptr, "markdownv2");
     });
-    bot.getEvents().onCommand("info", [&bot](TgBot::Message::Ptr message) {
+    bot.getEvents().onCommand("info", [&bot](const TgBot::Message::Ptr& message) {
         bot.getApi().sendMessage(message->chat->id, msg::infohandler(message), false, 0, nullptr, "markdownv2");
     });
     /* bot.getEvents().onAnyMessage([&bot](TgBot::Message::Ptr message) {

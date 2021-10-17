@@ -2,7 +2,7 @@
 #pragma once
 
 namespace user {
-    TgBot::User::Ptr get(TgBot::Message::Ptr message) {
+    TgBot::User::Ptr get(const TgBot::Message::Ptr& message) {
         if (message->replyToMessage) {
              return message->replyToMessage->from;
         } else {
