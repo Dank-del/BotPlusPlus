@@ -3,16 +3,19 @@
 #include <mdparser-cpp/WotoMd.h>
 #include <mdparser-cpp/WotoMd.cpp>
 #include "cmds/info.cpp"
+#include <toml.hpp>
 
 int main(int argc, char *argv[]) {
     spdlog::set_level(spdlog::level::debug); // Set global log level to debug
     spdlog::set_pattern("[%H:%M:%S %z] [Bot++] [%^---%L---%$] [thread %t] %v");
     if (argc == 1) {
-        spdlog::error("Bot token wasn't provided, quitting....");
+        spdlog::error(".toml configuration file wasn't provided, quitting....");
         exit(1);
     }
-    auto bot_token = (std::string(argv[1]));
-    spdlog::info("Using bot token {}", bot_token);
+    std::string config_file = std::string(argv[1]);
+    spdlog::info("Using config file {}", config_file);
+    auto data = toml::parse(config_file);
+    std::string bot_token = toml::find<std::string>(data, "bot_token");
     TgBot::Bot bot(bot_token);
     auto self = bot.getApi().getMe();
     bot.getEvents().onCommand("start", [&bot](const TgBot::Message::Ptr& message) {

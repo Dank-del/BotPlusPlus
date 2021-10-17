@@ -30,10 +30,17 @@ FetchContent_Declare(
     GIT_TAG caa8a8a78bfc14abf98a6183d12d3f0d02343542
 )
 
+FetchContent_Declare(
+        toml11
+        GIT_REPOSITORY https://github.com/ToruNiina/toml11.git
+        GIT_TAG bcee9f25a22ab4d9a1211ddeab6b4da251c45adf
+)
+
 FetchContent_MakeAvailable(TgBot)
 FetchContent_MakeAvailable(spdlog)
 FetchContent_MakeAvailable(mdparser-cpp)
+FetchContent_MakeAvailable(toml11)
 
 add_executable(${PROJECT_NAME} main.cpp)
-target_link_libraries(${PROJECT_NAME} TgBot spdlog mdparser-cpp)
+target_link_libraries(${PROJECT_NAME} TgBot spdlog mdparser-cpp toml11)
 
