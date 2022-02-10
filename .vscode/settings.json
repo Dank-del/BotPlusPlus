@@ -1,6 +1,7 @@
 {
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
     "cSpell.words": [
+        "Kitsu",
         "markdownv"
     ],
     "files.associations": {
@@ -76,6 +77,14 @@
         "cinttypes": "cpp",
         "typeindex": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
-    }
+        "variant": "cpp",
+        "csetjmp": "cpp",
+        "*.ipp": "cpp",
+        "forward_list": "cpp",
+        "unordered_set": "cpp",
+        "shared_mutex": "cpp",
+        "cfenv": "cpp",
+        "valarray": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Enabled"
 }
